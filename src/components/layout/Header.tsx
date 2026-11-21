@@ -38,9 +38,9 @@ export function Header() {
         }
       `}
     >
-      <div className="max-w-[1440px] mx-auto px-5 md:px-8 h-16 md:h-[72px] grid grid-cols-3 items-center">
+      <div className="max-w-[1440px] mx-auto px-5 md:px-8 h-16 md:h-[72px] grid grid-cols-[1fr_auto_1fr] items-center gap-x-3 md:gap-x-4">
         {/* Mobile menu */}
-        <div className="flex md:hidden">
+        <div className="flex md:hidden justify-self-start">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
@@ -51,14 +51,17 @@ export function Header() {
           </button>
         </div>
 
-        {/* Desktop left nav */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Основная навигация">
+        {/* Desktop left nav — nowrap + flexible column so labels stay on one line */}
+        <nav
+          className="hidden md:flex items-center justify-self-start gap-4 lg:gap-6 xl:gap-8 min-w-0"
+          aria-label="Основная навигация"
+        >
           {leftNav.map((item) => (
             <NavLink
               key={item.label}
               to={item.to}
               className={({ isActive }) =>
-                `font-body text-[11px] lg:text-xs tracking-[0.16em] uppercase transition-opacity hover:opacity-60 ${
+                `font-body text-[11px] lg:text-xs tracking-[0.16em] uppercase whitespace-nowrap shrink-0 transition-opacity hover:opacity-60 ${
                   isActive ? 'opacity-100' : 'opacity-80'
                 }`
               }
@@ -71,7 +74,7 @@ export function Header() {
         {/* Logo */}
         <Link
           to="/"
-          className="justify-self-center font-display text-[clamp(1.25rem,2.5vw,1.75rem)] tracking-[0.22em] sm:tracking-[0.3em] md:tracking-[0.35em] text-graphite hover:opacity-80 transition-opacity"
+          className="justify-self-center font-display text-[clamp(1.25rem,2.5vw,1.75rem)] tracking-[0.22em] sm:tracking-[0.3em] md:tracking-[0.35em] text-graphite hover:opacity-80 transition-opacity whitespace-nowrap"
           aria-label="MONVÉ — на главную"
         >
           MONVÉ
